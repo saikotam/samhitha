@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samhitha by Srica — India's Health Compliance Backbone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A1628;
+    --ink-light: #2A3A52;
+    --ink-muted: #5A6A82;
+    --surface: #FAFBFD;
+    --surface-warm: #F5F3EF;
+    --accent: #1B6B4A;
+    --accent-light: #2A9D6A;
+    --accent-glow: #D4F5E4;
+    --danger: #C53030;
+    --danger-light: #FFF0F0;
+    --gold: #B8860B;
+    --gold-light: #FFF8E7;
+    --border: #E2E5EA;
+    --white: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(250, 251, 253, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .logo-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .btn-nav {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .btn-nav:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* ── HERO ────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    animation: fadeInUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(27, 107, 74, 0.25);
+  }
+
+  .btn-primary:hover {
+    background: #15573c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(27, 107, 74, 0.35);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--ink);
+    background: var(--white);
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+    animation: fadeInUp 0.8s 0.3s ease both;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 24px 80px rgba(10, 22, 40, 0.08), 0 4px 16px rgba(10, 22, 40, 0.04);
+    position: relative;
+  }
+
+  .hero-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-light);
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  .status-badge.green {
+    background: var(--accent-glow);
+    color: var(--accent);
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .compliance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.06);
+  }
+
+  .compliance-row:last-child { border-bottom: none; }
+
+  .compliance-label {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  .compliance-value {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .compliance-value.ok { color: var(--accent); }
+  .compliance-value.warn { color: var(--gold); }
+
+  .hero-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-stat {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+
+  .hero-stat-label {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 0.25rem;
+  }
+
+  /* Floating badge */
+  .float-badge {
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    animation: floatY 4s ease-in-out infinite;
+  }
+
+  .float-badge.top-right {
+    top: -20px;
+    right: -30px;
+  }
+
+  .float-badge.bottom-left {
+    bottom: -15px;
+    left: -25px;
+    animation-delay: 1.5s;
+  }
+
+  .float-badge-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .float-badge-text {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink-light);
+  }
+
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PROBLEM SECTION ────────────────────── */
+  .problem {
+    padding: 6rem 2rem;
+    background: var(--ink);
+    color: var(--white);
+    position: relative;
+  }
+
+  .problem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .problem-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-overline {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-overline.red { color: var(--danger); }
+  .section-overline.green { color: var(--accent-light); }
+  .section-overline.gold { color: var(--gold); }
+
+  .problem h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .problem-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .risk-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+  }
+
+  .risk-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+  }
+
+  .risk-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .risk-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .risk-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── FEATURES ────────────────────────────── */
+  .features {
+    padding: 6rem 2rem;
+    background: var(--white);
+  }
+
+  .features-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .features-header h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .features-header p {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    border-radius: 0 0 3px 0;
+    transition: height 0.4s ease;
+  }
+
+  .feature-card:hover::after { height: 100%; }
+
+  .feature-card:hover {
+    border-color: var(--accent-glow);
+    box-shadow: 0 8px 32px rgba(27, 107, 74, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    background: var(--accent-glow);
+  }
+
+  .feature-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .feature-card p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--ink-muted);
+  }
+
+  .feature-card.highlight {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: linear-gradient(135deg, var(--accent-glow) 0%, var(--white) 100%);
+    border-color: rgba(27, 107, 74, 0.15);
+  }
+
+  .feature-card.highlight .feature-demo {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+  }
+
+  .feature-demo .line-green { color: var(--accent); }
+  .feature-demo .line-muted { color: var(--ink-muted); }
+
+  /* ── HOW IT WORKS ───────────────────────── */
+  .how-it-works {
+    padding: 6rem 2rem;
+    background: var(--surface);
+  }
+
+  .how-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .how-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .how-header h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .steps {
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-glow));
+  }
+
+  .step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+  }
+
+  .step:last-child { margin-bottom: 0; }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 14px;
+    background: var(--accent);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    padding-top: 0.15rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    max-width: 500px;
+  }
+
+  /* ── SCALE SECTION ──────────────────────── */
+  .scale {
+    padding: 6rem 2rem;
+    background: var(--white);
+  }
+
+  .scale-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .scale-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .scale-header h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .scale-header p {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+  }
+
+  .scale-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .scale-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all 0.3s;
+  }
+
+  .scale-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+
+  .scale-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .scale-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .scale-desc {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* ── CTA SECTION ────────────────────────── */
+  .cta {
+    padding: 6rem 2rem;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(27, 107, 74, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.2rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(27, 107, 74, 0.4);
+  }
+
+  .btn-cta:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-cta-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.2rem;
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-cta-outline:hover {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .cta-contact {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .cta-contact a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255,255,255,0.3);
+    transition: color 0.2s;
+  }
+
+  .cta-contact a:hover { color: var(--white); }
+
+  /* ── FOOTER ────────────────────────────── */
+  footer {
+    padding: 3rem 2rem;
+    background: #060E1A;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-brand span {
+    font-size: 0.72rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    display: block;
+    margin-top: 0.3rem;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-legal {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ── RESPONSIVE ────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .feature-card.highlight { grid-template-columns: 1fr; }
+    .scale-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-visual { order: -1; }
+    .float-badge { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2rem; }
+    .hero { padding-top: 6rem; }
+    .hero-actions { flex-direction: column; }
+    .hero-stat-row { grid-template-columns: 1fr; }
+    .cta h2 { font-size: 1.8rem; }
+    .problem h2, .features-header h2, .how-header h2, .scale-header h2 { font-size: 1.8rem; }
+    .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+    .cta-actions { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">Samhitha</span>
+      <span class="logo-tag">by Srica</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#contact" class="btn-nav">Request Demo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">India's Health Compliance Backbone</div>
+      <h1>PCPNDT compliance,<br><em>automated.</em></h1>
+      <p class="hero-sub">Samhitha eliminates manual Form F errors, sequence breaks, and audit failures across your entire diagnostic network — so your team can focus on patient care, not paperwork.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Demo →</a>
+        <a href="#features" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="float-badge top-right">
+        <div class="float-badge-icon">🛡️</div>
+        <div class="float-badge-text">Audit-Ready</div>
+      </div>
+      <div class="float-badge bottom-left">
+        <div class="float-badge-icon">⚡</div>
+        <div class="float-badge-text">Zero Downtime</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span class="hero-card-title">Branch Compliance Dashboard</span>
+          <span class="status-badge green">All Clear</span>
+        </div>
+        <div class="compliance-row">
+          <span class="compliance-label">Form F Sequence</span>
+          <span class="compliance-value ok">✓ No gaps</span>
+        </div>
+        <div class="compliance-row">
+          <span class="compliance-label">Today's Entries</span>
+          <span class="compliance-value ok">47 / 47 valid</span>
+        </div>
+        <div class="compliance-row">
+          <span class="compliance-label">Declaration Signatures</span>
+          <span class="compliance-value ok">✓ 100% captured</span>
+        </div>
+        <div class="compliance-row">
+          <span class="compliance-label">Next Inspection Window</span>
+          <span class="compliance-value warn">⚠ 12 days</span>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat">
+            <div class="hero-stat-num">150+</div>
+            <div class="hero-stat-label">Branches Ready</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">0</div>
+            <div class="hero-stat-label">Audit Failures</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ────────────────────────────────────────── -->
+<section class="problem" id="problem">
+  <div class="problem-inner">
+    <div class="section-overline red">The Compliance Gap</div>
+    <h2>One missed sequence number.<br>One unsealed register.<br>One failed inspection.</h2>
+    <p class="problem-text">PCPNDT non-compliance doesn't just mean paperwork errors — it means sealed ultrasound machines, legal notices, and reputational damage that takes years to recover from. At scale, the risk multiplies with every branch.</p>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-icon">📋</div>
+        <h3>Form F Errors</h3>
+        <p>Manual data entry across hundreds of scans per day leads to missing fields, wrong sequences, and incomplete declarations — each one a potential violation.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon">🔢</div>
+        <h3>Sequence Breaks</h3>
+        <p>500+ entries per day at high-volume branches. One jumbled sequence number during a surprise inspection and the entire register is questioned.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-icon">⚖️</div>
+        <h3>Legal Exposure</h3>
+        <p>The PCPNDT Act carries penalties including imprisonment, equipment seizure, and licence cancellation. The Appropriate Authority doesn't send warnings — they send notices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <div class="section-overline green">What Samhitha Does</div>
+      <h2>Compliance on autopilot</h2>
+      <p>Built by a radiologist who fills Form F every day — not by a software team guessing at workflows.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Auto-Fill Form F</h3>
+        <p>Patient demographics, referring doctor details, and centre information populate automatically from your existing HIS/EHR. The patient only signs the declaration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Sequence Management</h3>
+        <p>Automatic, tamper-proof sequential numbering across all branches. No gaps, no duplicates, no manual tracking — even at 500+ entries per day.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Inspection Readiness</h3>
+        <p>Real-time compliance dashboard for every branch. Know your audit status before the Appropriate Authority walks in — not after.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Network-Wide Oversight</h3>
+        <p>One dashboard for your entire chain. Flag non-compliant branches instantly. Generate inspection-ready reports in seconds, not hours.</p>
+      </div>
+      <div class="feature-card highlight">
+        <div>
+          <div class="feature-icon">⚡</div>
+          <h3>Lightweight Integration</h3>
+          <p>Samhitha works alongside your existing systems — no migration, no downtime, no IT overhaul. Deploys in days, not months. Your front desk workflow stays the same; the compliance layer happens automatically.</p>
+        </div>
+        <div class="feature-demo">
+          <span class="line-green">✓</span> <span class="line-muted">Patient registered in HIS</span><br>
+          <span class="line-green">✓</span> <span class="line-muted">Form F auto-populated</span><br>
+          <span class="line-green">✓</span> <span class="line-muted">Sequence # assigned: TG-VDC-2026-04721</span><br>
+          <span class="line-green">✓</span> <span class="line-muted">Declaration ready for signature</span><br>
+          <span class="line-green">✓</span> <span class="line-muted">Compliance status: AUDIT-READY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<section class="how-it-works" id="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <div class="section-overline gold">Implementation</div>
+      <h2>Live in 72 hours</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Assessment & Configuration</h3>
+          <p>We audit your current PCPNDT workflow, map your HIS/RIS fields, and configure Samhitha for your network's specific requirements — branch codes, zonal structures, and state-specific formats.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Pilot Deployment</h3>
+          <p>Samhitha goes live at 5–10 pilot branches. Front desk staff are trained in under 30 minutes. Your compliance team gets dashboard access on Day 1.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Validation & Scale</h3>
+          <p>After 30 days, we measure: form accuracy rate, sequence integrity, time saved per scan, and compliance score improvement. Then we roll out network-wide.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCALE ──────────────────────────────────────────── -->
+<section class="scale">
+  <div class="scale-inner">
+    <div class="scale-header">
+      <div class="section-overline green">Built for Scale</div>
+      <h2>From 5 branches to 500</h2>
+      <p>Samhitha is designed for India's largest diagnostic chains.</p>
+    </div>
+    <div class="scale-grid">
+      <div class="scale-card">
+        <div class="scale-num">2 min</div>
+        <div class="scale-label">Time Saved Per Scan</div>
+        <div class="scale-desc">At 200 scans/day, that's 6+ hours of front desk time recovered per branch.</div>
+      </div>
+      <div class="scale-card">
+        <div class="scale-num">100%</div>
+        <div class="scale-label">Form Accuracy</div>
+        <div class="scale-desc">Zero missing fields, zero sequence gaps, zero compliance surprises during inspections.</div>
+      </div>
+      <div class="scale-card">
+        <div class="scale-num">30 min</div>
+        <div class="scale-label">Staff Training</div>
+        <div class="scale-desc">Samhitha integrates into existing workflows. No process change required at the front desk.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <h2>Ready to make every branch<br>audit-proof?</h2>
+    <p>Start with a 5-branch pilot. See results in 30 days. No long-term commitments until you're convinced.</p>
+    <div class="cta-actions">
+      <a href="mailto:sai@srica.co.in?subject=Samhitha%20Demo%20Request" class="btn-cta">Request a Demo →</a>
+      <a href="mailto:sai@srica.co.in?subject=Samhitha%20Pilot%20Enquiry" class="btn-cta-outline">Start a Pilot</a>
+    </div>
+    <p class="cta-contact">Or reach out directly — <a href="mailto:sai@srica.co.in">sai@srica.co.in</a></p>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      Samhitha
+      <span>A product by Srica · Hyderabad, India</span>
+    </div>
+    <div class="footer-legal">© 2026 Srica. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
