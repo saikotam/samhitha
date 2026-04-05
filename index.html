@@ -250,6 +250,67 @@
   .metric-label { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 0.25rem; }
   .metric-desc { font-size: 0.72rem; color: var(--ink-muted); }
 
+  /* ── STANDALONE CALLOUT ──────────── */
+  .standalone {
+    padding: 3.5rem 2rem;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  .standalone-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.25rem 2.5rem;
+    background: linear-gradient(135deg, var(--green-glow) 0%, var(--surface) 100%);
+    border: 1px solid var(--green);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(13,124,74,0.06);
+  }
+  .standalone-text h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+  .standalone-text p {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+  .standalone-text p strong {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .btn-standalone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(13,124,74,0.2);
+  }
+  .btn-standalone:hover {
+    background: var(--green-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(13,124,74,0.3);
+  }
+  @media(max-width:600px){
+    .standalone-inner { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  }
+
   /* ── CTA ──────────────────────────── */
   .cta { padding: 7rem 2rem; background: var(--ink); position: relative; overflow: hidden; }
   .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 60% at 30% 100%, rgba(13,124,74,0.15) 0%, transparent 70%), radial-gradient(ellipse 40% 50% at 80% 0%, rgba(217,119,6,0.08) 0%, transparent 70%); pointer-events: none; }
@@ -273,11 +334,39 @@
   .footer-left span { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; color: rgba(255,255,255,0.18); margin-top: 0.3rem; }
   .footer-right { font-size: 0.72rem; color: rgba(255,255,255,0.18); }
 
+  /* ── HAMBURGER ────────────────────── */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 36px; height: 36px; position: relative; z-index: 110;
+    padding: 6px; flex-shrink: 0;
+  }
+  .hamburger span {
+    display: block; width: 100%; height: 2px; background: var(--ink);
+    border-radius: 2px; transition: all 0.3s ease; position: absolute; left: 6px; right: 6px;
+  }
+  .hamburger span:nth-child(1) { top: 9px; width: 24px; }
+  .hamburger span:nth-child(2) { top: 17px; width: 24px; }
+  .hamburger span:nth-child(3) { top: 25px; width: 24px; }
+  .hamburger.open span:nth-child(1) { top: 17px; transform: rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
+
   /* ── RESPONSIVE ──────────────────── */
   @media(max-width:900px){
     .hero h1{font-size:2.8rem} .feature-grid{grid-template-columns:1fr} .feat-wide{grid-template-columns:1fr}
     .principles-grid{grid-template-columns:1fr;gap:2rem} .metrics-inner{grid-template-columns:1fr 1fr}
-    .nav-links{display:none} .module-card{grid-template-columns:auto 1fr} .module-status{display:none}
+    .module-card{grid-template-columns:auto 1fr} .module-status{display:none}
+    .hamburger { display: block; }
+    .nav-links {
+      display: none; flex-direction: column; position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0; z-index: 105;
+      background: rgba(248,249,252,0.98); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      justify-content: center; align-items: center; gap: 2rem;
+      padding: 2rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.2rem; }
+    .nav-links a.btn-nav { font-size: 1rem; padding: 0.75rem 2rem; }
   }
   @media(max-width:600px){
     .hero h1{font-size:2.2rem} .hero{padding-top:6rem}
@@ -297,7 +386,10 @@
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="#" class="logo"><span class="logo-name">Samhitha</span></a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamBtn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#platform">Platform</a></li>
       <li><a href="#pcpndt">PCPNDT Module</a></li>
       <li><a href="#principles">Why Samhitha</a></li>
@@ -396,10 +488,21 @@
   </div>
 </section>
 
+<!-- ── STANDALONE CALLOUT ──────────── -->
+<section class="standalone">
+  <div class="standalone-inner rv">
+    <div class="standalone-text">
+      <h3>Run a single-centre practice?</h3>
+      <p>Samhitha isn't just for large chains. <strong>Our standalone version</strong> brings the same automated PCPNDT compliance to individual clinics and imaging centres — simple setup, same peace of mind.</p>
+    </div>
+    <a href="mailto:sai@samhithahealth.com?subject=Samhitha%20Standalone%20—%20Demo%20Request" class="btn-standalone">Get a Demo →</a>
+  </div>
+</section>
+
 <section class="cta" id="contact">
   <div class="cta-bg"></div>
   <div class="cta-inner">
-    <h2 class="rv">Make every branch<br><em>audit-proof</em></h2>
+    <h2 class="rv">Make every branch<br><em>inspection-proof</em></h2>
     <p class="rv">Start with a 5-branch pilot of the PCPNDT module. See results in 30 days. No long-term lock-in until you're convinced.</p>
     <div class="cta-actions rv">
       <a href="mailto:sai@samhithahealth.com?subject=Samhitha%20Demo%20Request" class="btn-cta">Request a Demo →</a>
@@ -418,6 +521,23 @@
 
 <script>
 !function(){
+  // 0 — Hamburger menu
+  var hamBtn=document.getElementById('hamBtn'),navLinks=document.getElementById('navLinks');
+  hamBtn.addEventListener('click',function(){
+    var open=navLinks.classList.toggle('open');
+    hamBtn.classList.toggle('open');
+    hamBtn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      navLinks.classList.remove('open');
+      hamBtn.classList.remove('open');
+      hamBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
+
   // 1 — Nav shadow
   var nav=document.getElementById('mainNav');
   addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>50)},{passive:true});
