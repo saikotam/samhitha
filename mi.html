@@ -14,7 +14,6 @@
   --text: #E8ECF1;
   --text-dim: #8893A4;
   --accent: #3B82F6;
-  --accent-glow: rgba(59, 130, 246, 0.15);
   --green: #22C55E;
   --amber: #F59E0B;
   --red: #EF4444;
@@ -34,16 +33,14 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
 .logo { font-family:'DM Serif Display',serif; font-size:28px; color:var(--accent); letter-spacing:-0.5px; }
 .logo-sub { font-size:13px; color:var(--text-dim); font-weight:500; letter-spacing:1.5px; text-transform:uppercase; margin-left:4px; }
 .header h1 { font-family:'DM Serif Display',serif; font-size:38px; font-weight:400; letter-spacing:-0.5px; line-height:1.2; margin-top:16px; }
-.header p { color:var(--text-dim); font-size:15px; margin-top:8px; line-height:1.6; }
+.header p { color:var(--text-dim); font-size:15px; margin-top:8px; line-height:1.6; max-width:900px; }
 
 .kpi-strip {
   display:grid; grid-template-columns:repeat(5,1fr); gap:1px;
   background:var(--border); margin:0 48px; border-radius:12px; overflow:hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
-.kpi {
-  background:var(--surface); padding:28px 24px; text-align:center;
-}
+.kpi { background:var(--surface); padding:28px 24px; text-align:center; }
 .kpi-val { font-family:'DM Serif Display',serif; font-size:36px; letter-spacing:-1px; }
 .kpi-label { font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.2px; margin-top:6px; font-weight:500; }
 .kpi:nth-child(1) .kpi-val { color:var(--accent); }
@@ -54,7 +51,6 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
 
 .content { padding:40px 48px; }
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; }
-.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-bottom:24px; }
 .full { margin-bottom:24px; }
 
 .card {
@@ -63,58 +59,84 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
 }
 .card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, var(--accent), var(--teal));
-  opacity:0.5;
+  background:linear-gradient(90deg, var(--accent), var(--teal)); opacity:0.5;
 }
 .card-title {
   font-size:11px; text-transform:uppercase; letter-spacing:1.8px;
   color:var(--text-dim); font-weight:700; margin-bottom:20px;
 }
 
-/* Bar chart */
 .bar-row { display:flex; align-items:center; margin-bottom:6px; }
 .bar-label { width:180px; font-size:12px; color:var(--text-dim); text-align:right; padding-right:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0; }
-.bar-track { flex:1; height:22px; background:var(--surface2); border-radius:4px; position:relative; overflow:hidden; }
-.bar-fill { height:100%; border-radius:4px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); display:flex; align-items:center; justify-content:flex-end; padding-right:8px; }
+.bar-track { flex:1; height:22px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; }
 .bar-val { font-size:11px; font-weight:700; color:var(--bg); min-width:30px; text-align:right; }
 .bar-val-outside { font-size:11px; font-weight:600; color:var(--text-dim); margin-left:8px; }
 
-/* Donut */
-.donut-wrap { display:flex; align-items:center; justify-content:center; gap:32px; }
-.donut-svg { width:180px; height:180px; }
+.donut-wrap { display:flex; align-items:center; justify-content:center; gap:32px; flex-wrap:wrap; }
 .donut-legend { display:flex; flex-direction:column; gap:8px; }
 .legend-item { display:flex; align-items:center; gap:8px; font-size:13px; }
 .legend-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
 
-/* Revenue table */
 .rev-table { width:100%; border-collapse:collapse; }
 .rev-table th { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-dim); text-align:left; padding:8px 12px; border-bottom:1px solid var(--border); font-weight:600; }
 .rev-table td { padding:10px 12px; font-size:14px; border-bottom:1px solid var(--border); }
-.rev-table tr:last-child td { border-bottom:none; font-weight:700; background:var(--surface2); }
+.rev-table .highlight-row td { border-bottom:none; font-weight:700; background:var(--surface2); }
 .rev-table .amt { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green); }
 
-/* Geo breakdown */
 .geo-blocks { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 .geo-block { background:var(--surface2); border-radius:8px; padding:18px; text-align:center; border:1px solid var(--border); }
 .geo-block .geo-val { font-family:'DM Serif Display',serif; font-size:28px; color:var(--accent); }
 .geo-block .geo-pct { font-size:20px; color:var(--green); font-weight:700; margin-top:2px; }
-.geo-block .geo-label { font-size:11px; color:var(--text-dim); margin-top:6px; text-transform:uppercase; letter-spacing:0.8px; }
+.geo-block .geo-label { font-size:11px; color:var(--text-dim); margin-top:6px; text-transform:uppercase; letter-spacing:0.8px; line-height:1.5; }
 
-/* Chain horizontal bars */
 .chain-bar-row { display:flex; align-items:center; margin-bottom:10px; }
 .chain-label { width:140px; font-size:13px; font-weight:600; text-align:right; padding-right:14px; flex-shrink:0; }
-.chain-track { flex:1; height:28px; background:var(--surface2); border-radius:6px; overflow:hidden; position:relative; }
+.chain-track { flex:1; height:28px; background:var(--surface2); border-radius:6px; overflow:hidden; }
 .chain-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:10px; }
 .chain-val { font-size:12px; font-weight:700; color:#fff; }
 
+.note-box {
+  background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25);
+  border-radius:8px; padding:14px 18px; margin-top:16px; font-size:12px;
+  color:var(--amber); line-height:1.6;
+}
+.insight-box {
+  background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25);
+  border-radius:8px; padding:14px 18px; margin-top:16px; font-size:13px;
+  color:var(--green); line-height:1.6;
+}
+
+/* Machine multiplier section */
+.multiplier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px; }
+.mult-card {
+  background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+  padding:20px; text-align:center;
+}
+.mult-card.featured { border-color:var(--green); background:rgba(34,197,94,0.06); }
+.mult-scenario { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-dim); font-weight:600; }
+.mult-machines { font-family:'DM Serif Display',serif; font-size:32px; margin:8px 0 4px; }
+.mult-machines span { font-size:14px; color:var(--text-dim); font-weight:400; }
+.mult-mrr { font-family:'DM Serif Display',serif; font-size:24px; color:var(--green); }
+.mult-arr { font-size:13px; color:var(--text-dim); margin-top:4px; }
+
+.cert-ref {
+  display:flex; gap:16px; align-items:flex-start; padding:16px; background:var(--surface2);
+  border-radius:8px; border:1px solid var(--border); margin-top:16px;
+}
+.cert-icon { font-size:28px; flex-shrink:0; }
+.cert-text { font-size:12px; color:var(--text-dim); line-height:1.6; }
+.cert-text strong { color:var(--text); }
+
 .footnote { margin-top:40px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-dim); font-size:12px; line-height:1.7; }
 .highlight { color:var(--amber); font-weight:600; }
+.section-divider { height:1px; background:var(--border); margin:8px 0 32px; }
 
 @media (max-width:900px) {
   .header, .content { padding:24px; }
   .kpi-strip { grid-template-columns:repeat(3,1fr); margin:0 24px; }
-  .grid-2, .grid-3 { grid-template-columns:1fr; }
-  .geo-blocks { grid-template-columns:repeat(2,1fr); }
+  .grid-2 { grid-template-columns:1fr; }
+  .geo-blocks, .multiplier-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -126,20 +148,21 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
     <span class="logo-sub">Market Intelligence</span>
   </div>
   <h1>Telangana PCPNDT Registry — Full Landscape</h1>
-  <p>Analysis of the official PCPNDT-registered facility list across all 33 districts of Telangana. Data source: State PCPNDT Authority registry.</p>
+  <p>Analysis of the official PCPNDT-registered facility list across all 33 districts. Source: State PCPNDT Authority registry.
+  Each registration can cover multiple machines — actual billable machine nodes are a multiplier on centre count (see Machine Multiplier section below).</p>
 </div>
 
 <div class="kpi-strip">
-  <div class="kpi"><div class="kpi-val">4,487</div><div class="kpi-label">Total Centres</div></div>
-  <div class="kpi"><div class="kpi-val">4,364</div><div class="kpi-label">Private Centres</div></div>
-  <div class="kpi"><div class="kpi-val">2,714</div><div class="kpi-label">Greater Hyd Metro (Pvt)</div></div>
+  <div class="kpi"><div class="kpi-val">4,487</div><div class="kpi-label">Total Registered</div></div>
+  <div class="kpi"><div class="kpi-val">4,362</div><div class="kpi-label">Private Centres</div></div>
+  <div class="kpi"><div class="kpi-val">2,712</div><div class="kpi-label">Greater Hyd Metro (Pvt)</div></div>
   <div class="kpi"><div class="kpi-val">33</div><div class="kpi-label">Districts</div></div>
-  <div class="kpi"><div class="kpi-val">88</div><div class="kpi-label">Vijaya Nodes Found</div></div>
+  <div class="kpi"><div class="kpi-val">86</div><div class="kpi-label">Vijaya Diagnostic Nodes</div></div>
 </div>
 
 <div class="content">
 
-<!-- GEO BREAKDOWN -->
+<!-- GEO CONCENTRATION -->
 <div class="full">
   <div class="card">
     <div class="card-title">Geographic Concentration</div>
@@ -147,22 +170,22 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
       <div class="geo-block">
         <div class="geo-val">2,575</div>
         <div class="geo-pct">57.4%</div>
-        <div class="geo-label">Hyderabad Core<br>(HYD + Medchal + RR)</div>
+        <div class="geo-label">Hyderabad Core<br><span style="font-size:9px;opacity:0.7">HYD (955) + Medchal (918) + RR (702)</span></div>
       </div>
       <div class="geo-block">
         <div class="geo-val">2,761</div>
         <div class="geo-pct">61.5%</div>
-        <div class="geo-label">Extended Metro<br>(+Sangareddy, Yadadri)</div>
+        <div class="geo-label">Extended Metro<br><span style="font-size:9px;opacity:0.7">+ Sangareddy (143) + Yadadri (43)</span></div>
       </div>
       <div class="geo-block">
         <div class="geo-val">790</div>
         <div class="geo-pct">17.6%</div>
-        <div class="geo-label">Tier-2 Cities<br>(Warangal, Karimnagar…)</div>
+        <div class="geo-label">Tier-2 Cities<br><span style="font-size:9px;opacity:0.7">Hanamkonda, Karimnagar, Nizamabad, Khammam, Nalgonda, Warangal</span></div>
       </div>
       <div class="geo-block">
         <div class="geo-val">936</div>
         <div class="geo-pct">20.9%</div>
-        <div class="geo-label">Rest of Telangana</div>
+        <div class="geo-label">Rest of Telangana<br><span style="font-size:9px;opacity:0.7">22 remaining districts</span></div>
       </div>
     </div>
   </div>
@@ -175,52 +198,139 @@ body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif
     <div id="distBars"></div>
   </div>
   <div class="card">
-    <div class="card-title">Facility Type Breakdown</div>
-    <div id="typeDonut" class="donut-wrap"></div>
+    <div class="card-title">Registration Type Breakdown</div>
+    <div id="typeDonut" class="donut-wrap" style="margin-bottom:20px;"></div>
+    <div class="note-box">
+      <strong>4,401 of 4,487</strong> (98.1%) hold Ultrasound registration. 253 hold Imaging Centre registration (CT/MRI) — those performing fetal scans carry identical PCPNDT obligations. 88 have ART registration, 87 have Genetic registration. Many hold multiple registrations.
+    </div>
   </div>
 </div>
 
-<!-- CHAIN TARGETS + SECTOR -->
+<!-- MACHINE MULTIPLIER — NEW SECTION -->
+<div class="full">
+  <div class="card" style="border-color:rgba(34,197,94,0.3);">
+    <div class="card-title" style="color:var(--green);">Machine Multiplier — Per-Machine Pricing Impact (Vijaya Diagnostic)</div>
+    <div class="cert-ref">
+      <div class="cert-icon">📋</div>
+      <div class="cert-text">
+        <strong>Reference: Vijaya Diagnostic Ameerpet (Reg. 0116A079)</strong> — Single PCPNDT registration covers <strong>3 machines</strong>: Philips Affiniti 50 (US), Samsung HS 50 (US), Fujifilm Aperto Lucent (MRI).
+        Each machine generates its own Form F sequence, serial numbers, and day-close reconciliation — compliance complexity scales per machine, not per centre. Owner: Ms. Suprita Reddy, CEO. Valid to 26-01-2027.
+      </div>
+    </div>
+    <div style="margin-top:24px;">
+      <div class="card-title">Vijaya Scenario Modelling — 86 Registered Centres × Machine Multiplier</div>
+      <div class="multiplier-grid">
+        <div class="mult-card">
+          <div class="mult-scenario">Conservative (1.5× avg)</div>
+          <div class="mult-machines">129 <span>machines</span></div>
+          <div class="mult-mrr">₹9.03L/mo</div>
+          <div class="mult-arr">₹1.08 Cr/yr @ ₹7K/machine</div>
+        </div>
+        <div class="mult-card featured">
+          <div class="mult-scenario">Moderate (2× avg)</div>
+          <div class="mult-machines" style="color:var(--green);">172 <span>machines</span></div>
+          <div class="mult-mrr" style="font-size:28px;">₹12.04L/mo</div>
+          <div class="mult-arr">₹1.44 Cr/yr @ ₹7K/machine</div>
+        </div>
+        <div class="mult-card">
+          <div class="mult-scenario">Aggressive (2.5× avg)</div>
+          <div class="mult-machines">215 <span>machines</span></div>
+          <div class="mult-mrr">₹15.05L/mo</div>
+          <div class="mult-arr">₹1.81 Cr/yr @ ₹7K/machine</div>
+        </div>
+      </div>
+      <div class="multiplier-grid">
+        <div class="mult-card">
+          <div class="mult-scenario">Conservative @ ₹5K floor</div>
+          <div class="mult-machines">129 <span>machines</span></div>
+          <div class="mult-mrr">₹6.45L/mo</div>
+          <div class="mult-arr">₹77.4L/yr</div>
+        </div>
+        <div class="mult-card featured">
+          <div class="mult-scenario">Moderate @ ₹5K floor</div>
+          <div class="mult-machines" style="color:var(--green);">172 <span>machines</span></div>
+          <div class="mult-mrr" style="font-size:28px;">₹8.60L/mo</div>
+          <div class="mult-arr">₹1.03 Cr/yr</div>
+        </div>
+        <div class="mult-card">
+          <div class="mult-scenario">Aggressive @ ₹5K floor</div>
+          <div class="mult-machines">215 <span>machines</span></div>
+          <div class="mult-mrr">₹10.75L/mo</div>
+          <div class="mult-arr">₹1.29 Cr/yr</div>
+        </div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <strong>Key insight:</strong> Even at floor pricing (₹5K/machine) with a conservative 1.5× multiplier, Vijaya alone = ₹77.4L ARR. At moderate 2× and anchor pricing (₹7K), it's ₹1.44 Cr ARR from a single client. The machine multiplier fundamentally changes the unit economics — Samhitha should price per machine node, not per centre.
+    </div>
+  </div>
+</div>
+
+<!-- CHAIN TARGETS + REVENUE -->
 <div class="grid-2">
   <div class="card">
-    <div class="card-title">Chain / Brand Footprint — Sales Targets</div>
+    <div class="card-title">Chain / Brand Footprint — Verified Sales Targets</div>
     <div id="chainBars"></div>
+    <div class="note-box" style="margin-top:20px;">
+      <strong>Methodology:</strong> Chain identification via facility name matching against official registry.
+      Vijaya (86): excludes non-chain "Vijaya" names (e.g. "Sri Sai Vijaya", "Park Health Care Vijaya").
+      Care Hospitals (8): verified Quality Care India Ltd units + standalone "CARE HOSPITAL" entries.
+      Star (5): Unimed Healthcare units + standalone "Star Hospital(s)".
+      All others matched on brand name. Actual footprints may be larger due to variant naming.
+      <br><strong>Total identified chain centres: 184 of 4,362 private (4.2%)</strong> — the remaining 95.8% are standalone/small-group clinics.
+    </div>
   </div>
   <div class="card">
-    <div class="card-title">Sector Split + Revenue Projections</div>
+    <div class="card-title">Sector Split</div>
     <div id="sectorDonut" class="donut-wrap" style="margin-bottom:28px;"></div>
+    <div class="card-title" style="margin-top:8px;">Revenue Scenarios — Per Centre Basis</div>
     <table class="rev-table">
-      <thead><tr><th>Scenario</th><th>Monthly MRR</th><th>Annual ARR</th></tr></thead>
+      <thead><tr><th>Scenario</th><th>MRR</th><th>ARR</th></tr></thead>
       <tbody>
-        <tr><td>Vijaya (88 nodes @ ₹7K)</td><td class="amt">₹6.16L</td><td class="amt">₹73.9L</td></tr>
-        <tr><td>Vijaya (88 nodes @ ₹5K floor)</td><td class="amt">₹4.40L</td><td class="amt">₹52.8L</td></tr>
-        <tr><td>Top 10 Chains (~228 nodes @ ₹5K)</td><td class="amt">₹11.4L</td><td class="amt">₹1.37Cr</td></tr>
-        <tr><td>+ 100 Standalone Clinics @ ₹5K</td><td class="amt">₹5.0L</td><td class="amt">₹60L</td></tr>
-        <tr><td style="color:var(--green);">Year 1 Realistic (Vijaya + 50 standalone)</td><td class="amt" style="font-size:22px;">₹7.78L</td><td class="amt" style="font-size:22px;">₹93.4L</td></tr>
+        <tr><td>Vijaya (86 centres @ ₹7K)</td><td class="amt">₹6.02L</td><td class="amt">₹72.2L</td></tr>
+        <tr><td>Vijaya (86 centres @ ₹5K)</td><td class="amt">₹4.30L</td><td class="amt">₹51.6L</td></tr>
+        <tr><td>All Chains (184 centres @ ₹5K)</td><td class="amt">₹9.20L</td><td class="amt">₹1.10Cr</td></tr>
+        <tr><td>+ 100 Standalone @ ₹5K</td><td class="amt">₹5.00L</td><td class="amt">₹60.0L</td></tr>
+        <tr class="highlight-row"><td style="color:var(--green);">Year 1 Realistic<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">Vijaya@₹6K + 50 standalone@₹5K</span></td><td class="amt" style="font-size:22px;">₹7.66L</td><td class="amt" style="font-size:22px;">₹91.9L</td></tr>
       </tbody>
     </table>
+    <div class="note-box" style="font-size:11px;">
+      Per-centre numbers shown above. With machine multiplier applied (see section above), actual revenue will be significantly higher. These scenarios are conservative floor estimates.
+    </div>
   </div>
 </div>
 
-<!-- DISTRICT HEATMAP TABLE -->
+<!-- HEATMAP -->
 <div class="full">
   <div class="card">
-    <div class="card-title">All 33 Districts — Heatmap</div>
+    <div class="card-title">All 33 Districts — Density Heatmap</div>
     <div id="heatmap" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:6px;"></div>
   </div>
 </div>
 
+<!-- VIJAYA GEOGRAPHIC -->
+<div class="full">
+  <div class="card">
+    <div class="card-title">Vijaya Diagnostic — Geographic Distribution (86 Registered Centres)</div>
+    <div id="vijayaBars"></div>
+    <div class="note-box" style="margin-top:16px;">
+      77 of 86 registered centres (89.5%) are in Hyderabad metro core. Vijaya publicly reports 162 total centres — difference includes centres outside Telangana, recent additions not yet in registry, or variant entity naming. Registry shows owner as Ms. Suprita Reddy, CEO for Hyderabad centres.
+    </div>
+  </div>
+</div>
+
 <div class="footnote">
-  <strong>Samhitha Health Systems</strong> — PCPNDT Compliance Management Platform<br>
-  Analysis generated from official Telangana PCPNDT registry data. <span class="highlight">4,487 registered centres</span> identified across 33 districts.
-  Greater Hyderabad metro accounts for 61.5% of all registrations. Private sector dominates at 97.3%.
-  Chain identification is approximate, based on facility name matching — actual chain node counts may vary.
-  <br>Contact: sai@samhithahealth.com &middot; samhithahealth.in
+  <strong>Samhitha Health Systems</strong> — PCPNDT Compliance Management Platform &middot; samhithahealth.in &middot; sai@samhithahealth.com<br><br>
+  <span class="highlight">4,487 PCPNDT-registered centres</span> across 33 Telangana districts. <span class="highlight">4,362 private</span> (97.2%), <span class="highlight">125 government</span> (2.8%). Greater Hyderabad metro = 61.5% of all registrations (2,712 private).
+  12 duplicate registrations (same name + address + district) retained as potential separate modality entries.
+  Chain counts are conservative name-match estimates; 184 identified chain centres represent 4.2% of private centres.
+  Machine multiplier analysis based on Vijaya Diagnostic Ameerpet PCPNDT certificate (Reg. 0116A079, dated 16-10-2025) showing 3 machines under single registration.
 </div>
 
 </div>
 
 <script>
+// ===== DISTRICT BARS =====
 const distData = [
   ["Hyderabad",955],["Medchal Malkajgiri",918],["Rangareddy",702],
   ["Hanamkonda",204],["Karimnagar",153],["Sangareddy",143],
@@ -228,17 +338,16 @@ const distData = [
   ["Warangal",91],["Bhadradri Kothagudem",90],["Mahbubnagar",88],
   ["Jagtial",85],["Suryapet",61],["Siddipet",59]
 ];
-const maxDist = distData[0][1];
-const distColors = ['#3B82F6','#3B82F6','#3B82F6','#14B8A6','#14B8A6','#14B8A6','#14B8A6','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA'];
-
+const maxDist = 955;
 const distEl = document.getElementById('distBars');
+const dColors = ['#3B82F6','#3B82F6','#3B82F6','#14B8A6','#14B8A6','#14B8A6','#14B8A6','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA','#A78BFA'];
 distData.forEach(([name,val],i) => {
   const pct = (val/maxDist*100).toFixed(1);
-  const isSmall = val/maxDist < 0.15;
+  const isSmall = val/maxDist < 0.12;
   distEl.innerHTML += `<div class="bar-row">
     <div class="bar-label">${name}</div>
     <div class="bar-track">
-      <div class="bar-fill" style="width:${pct}%;background:${distColors[i]};">
+      <div class="bar-fill" style="width:${pct}%;background:${dColors[i]};">
         ${!isSmall ? `<span class="bar-val">${val.toLocaleString()}</span>` : ''}
       </div>
     </div>
@@ -246,66 +355,61 @@ distData.forEach(([name,val],i) => {
   </div>`;
 });
 
-// Facility type donut
-const typeData = [
-  {label:'Ultrasound Clinic', val:4101, color:'#3B82F6'},
+// ===== DONUT HELPER =====
+function makeDonut(data, size, innerR) {
+  const total = data.reduce((s,d)=>s+d.val,0);
+  let cum = 0;
+  const r = size/2 - 10, cx = size/2, cy = size/2;
+  let paths = '';
+  data.forEach(d => {
+    const angle = (d.val/total)*360;
+    const s = cum, e = cum + angle;
+    const x1 = cx+r*Math.cos((s-90)*Math.PI/180), y1 = cy+r*Math.sin((s-90)*Math.PI/180);
+    const x2 = cx+r*Math.cos((e-90)*Math.PI/180), y2 = cy+r*Math.sin((e-90)*Math.PI/180);
+    paths += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${angle>180?1:0},1 ${x2},${y2} Z" fill="${d.color}" opacity="0.85"/>`;
+    cum = e;
+  });
+  const legend = data.map(d=>`<div class="legend-item"><div class="legend-dot" style="background:${d.color}"></div>${d.label} <strong style="margin-left:auto;color:var(--text)">${d.val.toLocaleString()}</strong></div>`).join('');
+  return `<svg viewBox="0 0 ${size} ${size}" style="width:${size}px;height:${size}px">${paths}<circle cx="${cx}" cy="${cy}" r="${innerR}" fill="var(--surface)"/><text x="${cx}" y="${cy-6}" text-anchor="middle" fill="var(--text)" font-family="DM Serif Display" font-size="${size>160?22:18}">${total.toLocaleString()}</text><text x="${cx}" y="${cy+12}" text-anchor="middle" fill="var(--text-dim)" font-size="9" font-family="DM Sans">TOTAL</text></svg><div class="donut-legend">${legend}</div>`;
+}
+
+// ===== FACILITY TYPE DONUT =====
+// Simplified groups that sum to 4487
+document.getElementById('typeDonut').innerHTML = makeDonut([
+  {label:'Ultrasound Only', val:4101, color:'#3B82F6'},
   {label:'Imaging + US', val:195, color:'#14B8A6'},
-  {label:'ART + US', val:57, color:'#A78BFA'},
-  {label:'Genetic + US', val:48, color:'#EC4899'},
-  {label:'ART Clinic', val:31, color:'#F59E0B'},
-  {label:'Imaging Centre', val:29, color:'#22C55E'},
-  {label:'Genetic Facility', val:26, color:'#EF4444'},
-];
-const totalType = typeData.reduce((s,d)=>s+d.val,0);
-let cumAngle = 0;
-let paths = '';
-typeData.forEach(d => {
-  const angle = (d.val/totalType)*360;
-  const startAngle = cumAngle;
-  const endAngle = cumAngle + angle;
-  const r = 80, cx = 90, cy = 90;
-  const x1 = cx + r * Math.cos((startAngle-90)*Math.PI/180);
-  const y1 = cy + r * Math.sin((startAngle-90)*Math.PI/180);
-  const x2 = cx + r * Math.cos((endAngle-90)*Math.PI/180);
-  const y2 = cy + r * Math.sin((endAngle-90)*Math.PI/180);
-  const large = angle > 180 ? 1 : 0;
-  paths += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z" fill="${d.color}" opacity="0.85"/>`;
-  cumAngle = endAngle;
-});
-let legend = typeData.map(d=>`<div class="legend-item"><div class="legend-dot" style="background:${d.color}"></div>${d.label} <strong style="margin-left:auto;color:var(--text)">${d.val.toLocaleString()}</strong></div>`).join('');
-document.getElementById('typeDonut').innerHTML = `
-  <svg class="donut-svg" viewBox="0 0 180 180">${paths}<circle cx="90" cy="90" r="45" fill="var(--surface)"/><text x="90" y="86" text-anchor="middle" fill="var(--text)" font-family="DM Serif Display" font-size="22">4,487</text><text x="90" y="104" text-anchor="middle" fill="var(--text-dim)" font-size="9" font-family="DM Sans">TOTAL</text></svg>
-  <div class="donut-legend">${legend}</div>`;
+  {label:'ART + US', val:43, color:'#A78BFA'},
+  {label:'ART Only', val:30, color:'#F59E0B'},
+  {label:'Imaging Only', val:29, color:'#22C55E'},
+  {label:'Genetic + US', val:28, color:'#EC4899'},
+  {label:'Genetic Only', val:24, color:'#EF4444'},
+  {label:'Multi-type combos', val:37, color:'#8B5CF6'},
+], 180, 48);
 
-// Sector donut
-const sectorData = [{label:'Private',val:4364,color:'#3B82F6'},{label:'Government',val:123,color:'#F59E0B'}];
-let cumS = 0; let sPaths = '';
-sectorData.forEach(d => {
-  const angle = (d.val/4487)*360;
-  const startAngle = cumS, endAngle = cumS + angle;
-  const r=60, cx=70, cy=70;
-  const x1=cx+r*Math.cos((startAngle-90)*Math.PI/180), y1=cy+r*Math.sin((startAngle-90)*Math.PI/180);
-  const x2=cx+r*Math.cos((endAngle-90)*Math.PI/180), y2=cy+r*Math.sin((endAngle-90)*Math.PI/180);
-  sPaths += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${angle>180?1:0},1 ${x2},${y2} Z" fill="${d.color}" opacity="0.85"/>`;
-  cumS = endAngle;
-});
-let sLegend = sectorData.map(d=>`<div class="legend-item"><div class="legend-dot" style="background:${d.color}"></div>${d.label} <strong style="margin-left:auto">${d.val.toLocaleString()} (${(d.val/4487*100).toFixed(1)}%)</strong></div>`).join('');
-document.getElementById('sectorDonut').innerHTML = `
-  <svg viewBox="0 0 140 140" style="width:120px;height:120px">${sPaths}<circle cx="70" cy="70" r="32" fill="var(--surface)"/></svg>
-  <div class="donut-legend">${sLegend}</div>`;
+// ===== SECTOR DONUT =====
+document.getElementById('sectorDonut').innerHTML = makeDonut([
+  {label:'Private', val:4362, color:'#3B82F6'},
+  {label:'Government', val:125, color:'#F59E0B'},
+], 140, 36);
 
-// Chain bars
+// ===== CHAIN BARS — FINAL VERIFIED =====
 const chainData = [
-  ['Vijaya Diagnostic',88,'#3B82F6'],['Care Hospitals',45,'#14B8A6'],
-  ['Apollo',27,'#A78BFA'],['Aarthi Scans',14,'#EC4899'],
-  ['Rainbow',12,'#22C55E'],['Medicover',12,'#F59E0B'],
-  ['Star Hospitals',10,'#EF4444'],['Yashoda',9,'#3B82F6'],
-  ['Kamineni',7,'#14B8A6'],['Cloudnine',4,'#A78BFA'],
+  ['Vijaya Diagnostic',86,'#3B82F6'],
+  ['Apollo',27,'#A78BFA'],
+  ['Medicover',12,'#14B8A6'],
+  ['Aarthi Scans',12,'#EC4899'],
+  ['Yashoda',9,'#F59E0B'],
+  ['KIMS',8,'#22C55E'],
+  ['Care Hospitals',8,'#EF4444'],
+  ['Rainbow Children\'s',7,'#A78BFA'],
+  ['Kamineni',7,'#14B8A6'],
+  ['Star Hospitals',5,'#3B82F6'],
+  ['Cloudnine',4,'#EC4899'],
 ];
-const maxChain = chainData[0][1];
+const maxChain = 86;
 const chainEl = document.getElementById('chainBars');
 chainData.forEach(([name,val,color]) => {
-  const pct = (val/maxChain*100).toFixed(1);
+  const pct = Math.max((val/maxChain*100), 8).toFixed(1);
   chainEl.innerHTML += `<div class="chain-bar-row">
     <div class="chain-label">${name}</div>
     <div class="chain-track">
@@ -316,7 +420,7 @@ chainData.forEach(([name,val,color]) => {
   </div>`;
 });
 
-// Heatmap
+// ===== HEATMAP =====
 const allDist = [
   ["Hyderabad",955],["Medchal Malkajgiri",918],["Rangareddy",702],
   ["Hanamkonda",204],["Karimnagar",153],["Sangareddy",143],
@@ -332,13 +436,32 @@ const allDist = [
 const hmEl = document.getElementById('heatmap');
 allDist.forEach(([name,val])=>{
   const intensity = Math.min(1, val/955);
-  const r = Math.round(59 + intensity*(59-59));
-  const g = Math.round(130 + intensity*(130-130));
-  const b = Math.round(246 * intensity);
-  const bg = `rgba(59,130,246,${0.08 + intensity*0.7})`;
+  const bg = `rgba(59,130,246,${0.08 + intensity*0.72})`;
   hmEl.innerHTML += `<div style="background:${bg};border:1px solid var(--border);border-radius:6px;padding:10px 8px;text-align:center;">
     <div style="font-family:'DM Serif Display';font-size:22px;color:var(--text)">${val}</div>
     <div style="font-size:10px;color:var(--text-dim);margin-top:2px;letter-spacing:0.3px;line-height:1.3">${name}</div>
+  </div>`;
+});
+
+// ===== VIJAYA GEOGRAPHIC =====
+const vijayaDist = [
+  ["Medchal Malkajgiri",27],["Rangareddy",26],["Hyderabad",24],
+  ["Sangareddy",2],["Hanamkonda",1],["Karimnagar",1],
+  ["Khammam",1],["Mahbubnagar",1],["Mancherial",1],
+  ["Nizamabad",1],["Warangal",1],
+];
+const vjEl = document.getElementById('vijayaBars');
+vijayaDist.forEach(([name,val]) => {
+  const pct = Math.max((val/27*100), 6).toFixed(1);
+  const isSmall = val/27 < 0.15;
+  vjEl.innerHTML += `<div class="bar-row">
+    <div class="bar-label">${name}</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${pct}%;background:var(--accent);">
+        ${!isSmall ? `<span class="bar-val">${val}</span>` : ''}
+      </div>
+    </div>
+    ${isSmall ? `<span class="bar-val-outside">${val}</span>` : ''}
   </div>`;
 });
 </script>
